@@ -1,51 +1,17 @@
 /**
  * Created by ikhlasfirlana on 9/7/17.
  */
+
+
 const Promise = require("promise");
+const look_string_in_object = require("./src/look_string_in_object");
+const number_into_rupiah = require("./src/number_into_rupiah");
 
 
 // object json { ... }
 // exist string "hello.world.test"
-exports.look_string_in_object = function (object, that_exist) {
-    "use strict";
+exports.look_string_in_object = look_string_in_object;
 
-    return new Promise(function (resolve, reject) {
 
-        try {
-
-            var this_is_exist = object;
-
-            if (typeof that_exist === "string") {
-
-                var tmp = that_exist.split(".");
-
-                for (var i in tmp) {
-
-                    if (typeof this_is_exist !== "undefined") {
-
-                        this_is_exist = this_is_exist[tmp[i]];
-
-                    }
-
-                }
-            }
-
-            if (typeof this_is_exist !== "undefined") {
-
-                resolve(this_is_exist);
-
-            } else {
-
-                resolve();
-
-            }
-
-        } catch (e) {
-
-            // console.log(":look_string_in_object:run_exist e", e);
-            reject(e);
-
-        }
-    });
-
-};
+// number int 100000
+exports.number_into_rupiah = number_into_rupiah;

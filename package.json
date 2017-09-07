@@ -1,6 +1,6 @@
 {
   "name": "transform-that",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "transform object into sepesific character with method chaining",
   "main": "index.js",
   "scripts": {

@@ -1,0 +1,26 @@
+{
+  "name": "transform-that",
+  "version": "0.0.1",
+  "description": "transform object into sepesific character with method chaining",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifirlana/transform_that.git"
+  },
+  "keywords": [
+    "transform",
+    "object"
+  ],
+  "author": "Ikhlas firlana <ifirlana@gmail.com> (https://firlana.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifirlana/transform_that/issues"
+  },
+  "homepage": "https://github.com/ifirlana/transform_that#readme",
+  "dependencies": {
+    "promise": "8.0.1"
+  }
+}

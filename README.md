@@ -9,7 +9,7 @@ it will be handle exist and transform text, handle exist object.
 
 ## list functions
 
-#### .look_string_in_object
+### .look_string_in_object
 `.look_string_in_object()` look a string variable inside object.
 ````
 var sample_object = {
@@ -45,7 +45,7 @@ it is returning  `{ "find_me": "yeah" }`
 
 
 
-#### .number_into_rupiah
+### .number_into_rupiah
 
 `.number_into_rupiah()` change int into string formatted rupiah.
 

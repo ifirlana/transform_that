@@ -28,7 +28,7 @@ var search_by_breath_first = function (this_json_object, this_string) {
 
 
     // function check
-    that.check = function (this_obj, this_string, i) {
+    that.check_beta_test = function (this_obj, this_string, i) {
 
         return new Promises(function (resolve, reject) {
 
@@ -67,6 +67,21 @@ var search_by_breath_first = function (this_json_object, this_string) {
 
     };
 
+    that.check = function (this_obj, this_string, i) {
+
+        var arr_obj = Object.keys(this_obj);
+
+        if (typeof arr_obj[i] === "undefined") {
+
+            return null;
+
+        } else {
+
+            return this_obj[arr_obj[i]];
+        }
+
+    };
+
 
     // main function
     that.run = function () {
@@ -78,7 +93,11 @@ var search_by_breath_first = function (this_json_object, this_string) {
                    that.set()
                        .then(function (value) {
 
-                           return that.check(this_json_object, "results")
+                           return loop(function () {
+
+                               // return
+
+                           }, "result")
 
                        })
                        .then(function (value) {

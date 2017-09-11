@@ -19,7 +19,9 @@ var loop = function (this_loop_function, until) {
 
             if (that.check !== until) {
 
-
+                this_loop_function()
+                    .then(that.loop_until)
+                    .catch(reject);
 
             } else {
 
@@ -32,13 +34,19 @@ var loop = function (this_loop_function, until) {
     };
 
 
-    that.loop_until = function (this_loop_function) {
+    that.loop_until = function () {
 
         return new Promises(function (resolve, reject) {
 
             if (that.check !== until) {
 
+                this_loop_function()
+                    .then(function (value) {
 
+                        that.check = value;
+
+                    })
+                    .then(that.loop_until);
 
             } else {
 

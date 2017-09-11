@@ -1,10 +1,12 @@
 /**
  * Created by ikhlasfirlana on 9/7/17.
  */
+var Promises = require("promise");
+
 module.exports = function (object, that_exist) {
     "use strict";
 
-    return new Promise(function (resolve, reject) {
+    return new Promises(function (resolve, reject) {
 
         try {
 

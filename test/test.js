@@ -49,3 +49,21 @@ transform_that
     .then(function(response) {
         console.log(response);
     });
+
+
+// scene search by breath first
+var obj = {
+    "first": {
+        "third": {
+            "result": "FOUND IT!"
+        }
+    },
+    "second": {
+        "wrong_way": "NOT FOUND!"
+    }
+};
+
+transform_that.search_by_breath_first(obj, "second")
+    .then(function (value) {
+        console.log(value);
+    });

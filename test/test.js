@@ -57,7 +57,12 @@ var obj = {
         "third": {
             "result": "FOUND IT!"
         },
-        "fifth": {}
+        "fifth": {
+            "hello": true,
+            "boom" : {
+                "yes": "no"
+            }
+        }
     },
     "second": {
         "wrong_way": "NOT FOUND!"
@@ -65,7 +70,7 @@ var obj = {
     "fourth" : {}
 };
 
-transform_that.search_by_breath_first(obj, "fifth")
+transform_that.search_by_breath_first(obj, "res")
     .then(function (value) {
         console.log(value);
     });

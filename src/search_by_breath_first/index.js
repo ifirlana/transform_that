@@ -3,7 +3,7 @@
  */
 
 var Promises = require("promise");
-var loop = require("./loop");
+var loop = require("./loop/loop");
 
 
 var search_by_breath_first = function (this_json_object, this_string) {
@@ -79,7 +79,9 @@ var search_by_breath_first = function (this_json_object, this_string) {
                    that.set()
                        .then(function (value) {
 
-                           loop().loop_here(this_json_object, this_string);
+                           loop
+                               .set(this_json_object, this_string)
+                               .run();
 
                        })
                        .then(function (value) {

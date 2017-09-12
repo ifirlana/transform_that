@@ -56,14 +56,16 @@ var obj = {
     "first": {
         "third": {
             "result": "FOUND IT!"
-        }
+        },
+        "fifth": {}
     },
     "second": {
         "wrong_way": "NOT FOUND!"
-    }
+    },
+    "fourth" : {}
 };
 
-transform_that.search_by_breath_first(obj, "second")
+transform_that.search_by_breath_first(obj, "fifth")
     .then(function (value) {
         console.log(value);
     });

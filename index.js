@@ -17,5 +17,5 @@ exports.look_string_in_object = look_string_in_object;
 exports.number_into_rupiah = number_into_rupiah;
 
 
-// number int 100000
+// get search tree by breath first method
 exports.search_by_breath_first = search_by_breath_first;

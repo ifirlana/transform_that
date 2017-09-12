@@ -10,6 +10,7 @@ var loop = function () {
 
     this.that_object = {};
     this.that_until = "";
+    this.result_array = [];
 
 };
 
@@ -39,7 +40,6 @@ loop.prototype.check = function () {
 loop.prototype.run = function () {
 
 
-
     this.breath_first_main();
 
 
@@ -57,30 +57,31 @@ loop.prototype.breath_first_main = function () {
     if (array.length > 0) {
 
         // first steps
-        var found_in_properties = this.breath_first_main_find_in_properties(array, this.that_until);
+        this.breath_first_main_first_phase("", object_local);
 
-
-        // first steps
-        // look value
-        // property not found similar
-        if (found_in_properties === false) {
-
-            this.breath_first_main_first_phase("", object_local);
-
-        }
     }
 
     return this;
 };
 
+loop.prototype.get_result = function () {
+
+    return this.result_array;
+};
+
 
 loop.prototype.breath_first_main_first_phase = function (path, object_local) {
 
-    for (var j in object_local) {
+    var _object = Object.keys(object_local);
+    var k = 0;
+    while (k < _object.length) {
 
         // first steps
+        var j = _object[k];
         var _path = path+j+".";
+
         console.log(_path, JSON.stringify(object_local[j]));
+
         var object_tree = object_local[j];
 
         if (typeof object_tree === "object" && Object.keys(object_tree).length > 0) {
@@ -93,56 +94,34 @@ loop.prototype.breath_first_main_first_phase = function (path, object_local) {
                 var found_in_properties = this.breath_first_main_find_in_properties(second_steps, this.that_until);
                 if (found_in_properties === false) {
 
-                    this.breath_first_main_first_phase(_path, object_tree);
+                    var check = this.breath_first_main_first_phase(_path, object_tree);
+                    if (check === true){
+                        k = _object.length;
+                    }
 
                 } else {
 
-                    console.log("FOUND!!!! ", second_steps[found_in_properties]);
+                    // console.log("FOUND!!!! ", _path+second_steps[found_in_properties]+".");
+                    this.result_array.push(_path+second_steps[found_in_properties]);
+                    k = _object.length;
+                    return true;
 
                 }
 
             }
 
+        } else if (typeof object_tree === "string" && object_tree === this.that_until) {
+
+            k = _object.length;
+            return true;
+
         }
+
+        k++;
 
     }
 
     return this;
-};
-
-
-loop.prototype.breath_first_main_first_phase_child = function (path, object_tree) {
-    var _path = path;
-    // this.breath_first_main_first_phase(object_tree);
-    for (var k in object_tree) {
-
-        // second steps
-        console.log(_path, k, JSON.stringify(object_tree[k]));
-        var object_tree_child = object_tree[k];
-
-        if (typeof object_tree_child === "object" && Object.keys(object_tree_child).length > 0) {
-
-            var third_steps = Object.keys(object_tree_child);
-
-            if (third_steps.length > 0) {
-
-                var found_in_properties_ = this.breath_first_main_find_in_properties(third_steps, this.that_until);
-                if (found_in_properties_ === false) {
-
-                    this.breath_first_main_first_phase_child(_path+":", object_tree_child);
-
-                } else {
-                    console.log("FOUND!!!! ", third_steps[found_in_properties_]);
-                }
-
-            }
-
-        }
-
-    }
-
-    return this;
-
 };
 
 
@@ -180,11 +159,11 @@ loop.prototype.main = function () {
 
     var set_array_object = Object.keys(this.that_object);
 
-    console.log(":main:set_array_object ", set_array_object);
+    // console.log(":main:set_array_object ", set_array_object);
 
     if (set_array_object.length > 0) {
 
-        console.log(":main:OK");
+        // console.log(":main:OK");
         this.main_loop("", this.that_object, set_array_object, 0);
 
     }

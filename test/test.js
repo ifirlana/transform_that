@@ -72,7 +72,12 @@ var obj = {
     "fourth" : {}
 };
 
-transform_that.search_by_breath_first(obj, "hello")
+transform_that.search_by_breath_first(obj, "wrong_way")
     .then(function (value) {
-        console.log(value);
+        console.log(value, value.length);
+
+        return transform_that.look_string_in_object(obj, value[0])
+    })
+    .then(function (value) {
+        console.log("result: ",value);
     });

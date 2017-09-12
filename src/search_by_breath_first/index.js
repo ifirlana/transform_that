@@ -79,14 +79,15 @@ var search_by_breath_first = function (this_json_object, this_string) {
                    that.set()
                        .then(function (value) {
 
-                           loop
+                           return loop
                                .set(this_json_object, this_string)
-                               .run();
+                               .run()
+                               .get_result();
 
                        })
                        .then(function (value) {
 
-                           resolve([that.empty_string]);
+                           resolve(value);
 
                        })
                        .catch(function (reason) {

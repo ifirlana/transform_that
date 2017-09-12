@@ -40,13 +40,136 @@ loop.prototype.run = function () {
 
 
 
-    this.main();
+    this.breath_first_main();
 
 
     return this;
 };
 
 
+loop.prototype.breath_first_main = function () {
+
+    var object_local = this.that_object;
+
+    var array = Object.keys(object_local);
+
+    // check if property same like expected
+    if (array.length > 0) {
+
+        // first steps
+        var found_in_properties = this.breath_first_main_find_in_properties(array, this.that_until);
+
+
+        // first steps
+        // look value
+        // property not found similar
+        if (found_in_properties === false) {
+
+            this.breath_first_main_first_phase(object_local);
+
+        }
+    }
+
+    return this;
+};
+
+
+loop.prototype.breath_first_main_first_phase = function (object_local) {
+
+    for (var j in object_local) {
+
+        // first steps
+        console.log(":first_steps ", j, JSON.stringify(object_local[j]));
+        var object_tree = object_local[j];
+
+        if (typeof object_tree === "object" && Object.keys(object_tree).length > 0) {
+
+            // second steps
+            var second_steps = Object.keys(object_tree);
+
+            if (second_steps.length > 0) {
+
+                // second steps
+                var found_in_properties = this.breath_first_main_find_in_properties(second_steps, this.that_until);
+
+                if (found_in_properties === false) {
+
+                    // this.breath_first_main_first_phase(object_tree);
+                    for (var k in object_tree) {
+
+                        // second steps
+                        console.log(":second_steps ", k, JSON.stringify(object_tree[k]));
+                        var object_tree_child = object_tree[k];
+
+                        if (typeof object_tree_child === "object" && Object.keys(object_tree_child).length > 0) {
+
+                            var third_steps = Object.keys(object_tree_child);
+
+                            if (third_steps.length > 0) {
+
+                                var found_in_properties_ = this.breath_first_main_find_in_properties(third_steps, this.that_until);
+
+                                if (found_in_properties_ === false) {
+
+                                    for (var l in object_tree_child) {
+
+                                        // third steps
+                                        console.log(":third_steps ", l, JSON.stringify(object_tree_child[l]));
+
+                                    }
+
+                                } else {
+                                    console.log("FOUND!!!! ", third_steps[found_in_properties_]);
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                } else {
+                    console.log("FOUND!!!! ", second_steps[found_in_properties]);
+                }
+            }
+
+        }
+
+    }
+
+    return this;
+};
+
+// check properties same like the finder
+loop.prototype.breath_first_main_find_in_properties = function (steps, until) {
+    var k = 0;
+    var set;
+
+    while (k < steps.length) {
+
+        if (steps[k] === until) {
+
+            set = k;
+            k = steps.length;
+        }
+
+        k++;
+    }
+
+    if (typeof set === "undefined") {
+
+        return false;
+
+    } else {
+
+        return set;
+
+    }
+};
+
+
+// Breath First Search
+// Sections
 loop.prototype.main = function () {
 
     var set_array_object = Object.keys(this.that_object);
@@ -68,6 +191,8 @@ loop.prototype.main_loop = function (path, object_from, check_this_property, ite
     console.log(":main_loop:", iterate);
     console.log(":main_loop:exist ", object_from.hasOwnProperty(check_this_property[iterate]));
 
+    var check_found = false;
+
     if (object_from.hasOwnProperty(check_this_property[iterate]) === true && check_this_property[iterate] !== this.that_until) {
 
         path += check_this_property[iterate]+ ".";
@@ -82,21 +207,9 @@ loop.prototype.main_loop = function (path, object_from, check_this_property, ite
     } else if (check_this_property[iterate] === this.that_until) {
 
 
+        check_found = true;
 
     }
-    // if (well_object.hasOwnProperty(well_property) === true) {
-    //
-    //     var child = well_object[well_property];
-    //     var set_array_object_child = Object.keys(child);
-    //     var iterate_child = iterate + 1;
-    //
-    //     console.log(":main_loop:iterate_child ", iterate_child);
-    //     console.log(":main_loop:child", child );
-    //     console.log(":main_loop:set_array_object_child ", set_array_object_child[0]);
-    //
-    //     main_loop(child, set_array_object_child[0], iterate_child);
-    //
-    // }
 
 };
 

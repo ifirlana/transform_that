@@ -65,12 +65,14 @@ var obj = {
         }
     },
     "second": {
-        "wrong_way": "NOT FOUND!"
+        "wrong_way": {
+            "yuhu" : "NOT FOUND!"
+        }
     },
     "fourth" : {}
 };
 
-transform_that.search_by_breath_first(obj, "res")
+transform_that.search_by_breath_first(obj, "hello")
     .then(function (value) {
         console.log(value);
     });

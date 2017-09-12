@@ -80,7 +80,7 @@ loop.prototype.breath_first_main_first_phase = function (path, object_local) {
         var j = _object[k];
         var _path = path+j+".";
 
-        console.log(_path, JSON.stringify(object_local[j]));
+        // console.log(_path, JSON.stringify(object_local[j]));
 
         var object_tree = object_local[j];
 

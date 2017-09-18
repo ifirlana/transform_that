@@ -3,7 +3,6 @@
  */
 const transform_that = require("../index");
 
-
 var sample_object = {
     "hello" : {
         "world": {

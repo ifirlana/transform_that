@@ -201,4 +201,4 @@ loop.prototype.main_loop = function (path, object_from, check_this_property, ite
 
 
 // init directly if require
-module.exports = new loop();
+module.exports = loop;

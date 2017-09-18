@@ -3,46 +3,86 @@
  */
 var Promises = require("promise");
 
-module.exports = function (object, that_exist) {
-    "use strict";
+var Func = function () {
 
-    return new Promises(function (resolve, reject) {
+    return this;
+};
 
-        try {
 
-            var this_is_exist = object;
+// set variable
+Func.prototype.set = function (obj) {
 
-            if (typeof that_exist === "string") {
+    this.object = obj.object;
+    this.that_exist = obj.that_exist;
 
-                var tmp = that_exist.split(".");
+    return this;
+};
 
-                for (var i in tmp) {
 
-                    if (typeof this_is_exist !== "undefined") {
+// process library
+Func.prototype.main = function () {
 
-                        this_is_exist = this_is_exist[tmp[i]];
+    var this_is_exist = this.object;
+    var that_exist = this.that_exist;
 
-                    }
+    if (typeof that_exist === "string") {
 
-                }
-            }
+        var tmp = that_exist.split(".");
+
+        for (var i in tmp) {
 
             if (typeof this_is_exist !== "undefined") {
 
-                resolve(this_is_exist);
-
-            } else {
-
-                resolve();
+                this_is_exist = this_is_exist[tmp[i]];
 
             }
 
-        } catch (e) {
-
-            // console.log(":look_string_in_object:run_exist e", e);
-            reject(e);
-
         }
-    });
+    }
 
+    if (typeof this_is_exist !== "undefined") {
+        this.result = this_is_exist;
+    }
+
+    return this;
 };
+
+
+// get result
+Func.prototype.get = function () {
+
+    if (typeof this.result === "undefined") {
+
+        this.result = [];
+
+    }
+
+    return this.result;
+};
+
+
+// method chaining
+Func.prototype.then = function (callback) {
+    var that = this;
+
+    callback(that.get());
+
+    return this;
+};
+
+
+// export
+var look_string_in_object = function (object, that_exist) {
+
+    var func = new Func();
+    return func
+        .set({
+            object: object,
+            that_exist: that_exist
+        })
+        .main();
+};
+
+
+exports.func = Func;
+module.exports = look_string_in_object;
